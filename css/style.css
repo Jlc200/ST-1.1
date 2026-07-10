@@ -631,12 +631,13 @@ main {
   }
 
   .modal-dialog {
-    max-width: 90%;
-    margin: 1.75rem auto;
+    width: calc(100% - 1rem);
+    max-width: none;
+    margin: 0.75rem auto;
   }
 
   .modal-content {
-    margin: 0 0.5rem;
+    margin: 0;
   }
 }
 
