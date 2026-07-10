@@ -305,6 +305,7 @@ function inicializarCatalogoProductos(productos) {
 
   productos.forEach((producto) => {
     const div = document.createElement("div");
+    const precioFormateado = Number(producto.precio).toFixed(2);
     div.classList.add("producto", `category-${producto.categoria}`);
     // Verificar la disponibilidad del producto
     if (producto.disponible === "DISPONIBLE") {
@@ -314,7 +315,7 @@ function inicializarCatalogoProductos(productos) {
                     <img class="cimg" src="${producto.imagen}" alt="${producto.marca}">
                     <div class="producto-info">
                       <h3 class="producto-title">${producto.marca}</h3>
-                      <span class="producto-precio">S/. ${producto.precio}</span>
+                      <span class="producto-precio">S/ ${precioFormateado}</span>
                     </div>
                 </div>
                 <div class="face back">
@@ -338,7 +339,7 @@ function inicializarCatalogoProductos(productos) {
                     <img class="img" src="${producto.imagen}" alt="${producto.marca}">
                     <div class="producto-info">
                       <h3 class="producto-title">${producto.marca}</h3>
-                      <span class="producto-precio">S/. ${producto.precio}</span>
+                      <span class="producto-precio">S/ ${precioFormateado}</span>
                     </div>
                 </div>
                 <div class="face back">
