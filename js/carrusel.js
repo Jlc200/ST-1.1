@@ -1,9 +1,23 @@
-  // Datos de ejemplo para tus tarjetas
-    const allCardsData = [
-        { title: 'Tarjeta 1', text: 'https://www.google.com', img: 'img/8.png' },
-        { title: 'Tarjeta 2', text: 'https://www.openai.com', img: 'img/9.png' },
-        { title: 'Tarjeta 3', text: 'https://www.github.com', img: 'img/3.png' },
-        { title: 'Tarjeta 4', text: 'https://www.stackoverflow.com', img: 'img/4.png' },        
-    ];
-   
-  
+ // Datos para el carrusel principal
+const allCardsData = [
+  {
+    title: "Ofertas especiales",
+    text: "Descubre precios bajos en productos seleccionados.",
+    img: "img/8.png",
+  },
+  {
+    title: "Entrega rápida",
+    text: "Recibe tu pedido con envío rápido y seguro.",
+    img: "img/9.png",
+  },
+  {
+    title: "Calidad garantizada",
+    text: "Productos frescos y marcas confiables para tu hogar.",
+    img: "img/3.png",
+  },
+  {
+    title: "Compras fáciles",
+    text: "Busca, agrega y paga desde un mismo lugar.",
+    img: "img/4.png",
+  },
+];
