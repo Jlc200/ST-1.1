@@ -389,7 +389,15 @@ function inicializarCatalogoProductos(productos) {
 
 // Inicializar catálogo de productos al cargar la página
 window.addEventListener("load", () => {
+  const heroBienvenida = document.getElementById("heroBienvenida");
+
   inicializarCatalogoProductos(stockProductos);
+
+  if (heroBienvenida) {
+    setTimeout(() => {
+      heroBienvenida.classList.add("is-hidden");
+    }, 10000);
+  }
 
   // Cargar el carrito desde el local storage
   const carritoLocalStorage = localStorage.getItem("carrito");
@@ -520,6 +528,38 @@ function filtrarCategoria(enlace) {
     }
   });
 }
+
+// funcion para renderizar los filtros de categoría
+function renderCategoryFilters() {
+  const filtersContainer = document.getElementById("filtrosCategorias");
+
+  if (!filtersContainer) return;
+
+  filtersContainer.innerHTML = categoryFiltersData
+    .map((categoria, index) => {
+      const isActive = index === 0;
+      return `
+        <button
+          type="button"
+          class="op ${isActive ? "active" : ""}"
+          data-filter="${categoria.filter}"
+          aria-current="${isActive ? "page" : "false"}"
+        >
+          <div class="mt-2">
+            <img height="50" src="${categoria.image}" alt="${categoria.name}">
+          </div>
+          <span class="nav-link txt fv">${categoria.name}</span>
+        </button>
+      `;
+    })
+    .join("");
+
+  filtersContainer.querySelectorAll(".op").forEach((item) => {
+    item.addEventListener("click", () => filtrarCategoria(item));
+  });
+}
+
+document.addEventListener("DOMContentLoaded", renderCategoryFilters);
 
 // Función para generar el string del QR
 function generarQRString() {
