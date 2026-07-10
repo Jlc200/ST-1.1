@@ -327,7 +327,7 @@ function inicializarCatalogoProductos(productos) {
                       </ul>
                     </div>
                     <div class="producto-actions">
-                      <a href="#" class="btn w-100 agregar-carrito" data-id="${producto.id}">Agregar al carrito</a>
+                      <button type="button" class="btn w-100 agregar-carrito" data-id="${producto.id}">Agregar al carrito</button>
                     </div>
                 </div>
             `;
