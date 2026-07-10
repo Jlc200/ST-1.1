@@ -1,4 +1,4 @@
- // Datos para el carrusel principal
+// Datos para el carrusel principal
 const allCardsData = [
   {
     title: "Ofertas especiales",

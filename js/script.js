@@ -312,17 +312,21 @@ function inicializarCatalogoProductos(productos) {
                 <div class="face front" id="${producto.qr}">
                     <span class="producto-badge">Disponible</span>
                     <img class="cimg" src="${producto.imagen}" alt="${producto.marca}">
-                    <h1>S/. <span>${producto.precio}</span></h1>
+                    <div class="producto-info">
+                      <h3 class="producto-title">${producto.marca}</h3>
+                      <span class="producto-precio">S/. ${producto.precio}</span>
+                    </div>
                 </div>
                 <div class="face back">
                     <div>
+                      <span class="producto-subtitle">Detalles</span>
                       <h4 class="name my-0 font-weight-bold">${producto.marca}</h4>
-                      <ul class="list-unstyled mt-3 mb-4">
+                      <ul class="list-unstyled mt-2 mb-3">
                           ${producto.detalles.map((ele) => `<li>${ele}</li>`).join("")}
                       </ul>
                     </div>
-                    <div>
-                      <a href="#" class="btn w-100 btn-success agregar-carrito" data-id="${producto.id}">Agregar al carrito</a>
+                    <div class="producto-actions">
+                      <a href="#" class="btn w-100 agregar-carrito" data-id="${producto.id}">Agregar al carrito</a>
                     </div>
                 </div>
             `;
@@ -332,19 +336,21 @@ function inicializarCatalogoProductos(productos) {
                 <div class="face front">
                     <span class="producto-badge agotado">Agotado</span>
                     <img class="img" src="${producto.imagen}" alt="${producto.marca}">
-                    <h1>S/. <span>${producto.precio}</span></h1>
+                    <div class="producto-info">
+                      <h3 class="producto-title">${producto.marca}</h3>
+                      <span class="producto-precio">S/. ${producto.precio}</span>
+                    </div>
                 </div>
                 <div class="face back">
                     <div>
+                      <span class="producto-subtitle">Detalles</span>
                       <h4 class="name my-0 font-weight-bold">${producto.marca}</h4>
-                      <ul class="list-unstyled mt-3 mb-4">
+                      <ul class="list-unstyled mt-2 mb-3">
                           ${producto.detalles.map((ele) => `<li>${ele}</li>`).join("")}
                       </ul>
                     </div>
-                    <div>
+                    <div class="producto-actions">
                       <h5 class="text-warning fw-bold">${producto.disponible}</h5>
-                      <h1 class="card-title pricing-card-title precio">S/. <span>${producto.precio}</span></h1>
-                      <button class="btn w-100 btn-secondary disabled" disabled>Agotado</button>
                     </div>
                 </div>
             `;
@@ -519,17 +525,6 @@ function generarQRString() {
   const cliente = document.getElementById("cliente").value.trim();
   const monto = document.getElementById("montoEfectivo").value || "";
 
-  if (!cliente) {
-    Swal.fire({
-      title: "NOMBRE VACÍO",
-      text: "Ingresa tu nombre en el campo requerido",
-      icon: "warning",
-      showConfirmButton: false,
-      timer: 2000,
-    });
-    return null;
-  }
-
   if (carrito.length === 0) {
     Swal.fire({
       title: "CARRITO VACÍO",
@@ -547,7 +542,8 @@ function generarQRString() {
     .join(",");
 
   // Formato: QS1|nombre|monto|cantidad*qr,cantidad*qr,...
-  let qrString = `QS1|${cliente}|${monto}|${productosQR}`;
+  const nombreCliente = cliente || "PUBLICO GENERAL";
+  let qrString = `QS1|${nombreCliente}|${monto}|${productosQR}`;
 
   return qrString;
 }
@@ -575,11 +571,24 @@ function generarQR() {
   });
 
   // Mostrar información
+  const cliente =
+    document.getElementById("cliente").value.trim() || "PUBLICO GENERAL";
   document.getElementById("qrInfo").textContent =
-    `Cliente: ${document.getElementById("cliente").value} | Monto: ${document.getElementById("montoEfectivo").value || "N/A"}`;
+    `Cliente: ${cliente} | Monto: ${document.getElementById("montoEfectivo").value || "N/A"}`;
 
-  // Mostrar el modal
-  const qrModal = new bootstrap.Modal(document.getElementById("qrModal"));
+  const carritoModalElement = document.getElementById("carritoModal");
+  const carritoModal =
+    bootstrap.Modal.getInstance(carritoModalElement) ||
+    new bootstrap.Modal(carritoModalElement);
+
+  if (carritoModal) {
+    carritoModal.hide();
+  }
+
+  const qrModalElement = document.getElementById("qrModal");
+  const qrModal =
+    bootstrap.Modal.getInstance(qrModalElement) ||
+    new bootstrap.Modal(qrModalElement);
   qrModal.show();
 }
 
