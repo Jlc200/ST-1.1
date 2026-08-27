@@ -1,3 +1,9 @@
+// Configuracion general del negocio. Edita estos valores para personalizar la tienda.
+const businessConfig = {
+  name: "JLCSTORE",
+  logo: "https://www.pngmart.com/files/23/Free-Logos-PNG-Clipart.png",
+  headerColor: "#f54d10",
+};
 // Datos para el carrusel principal
 const allCardsData = [
   {
@@ -91,10 +97,9 @@ const categoryFiltersData = [
       "https://lh3.googleusercontent.com/pw/AP1GczPtQFmO0XQv3RPp3RJFkGG3RsKtUh6cc9RpISw87fkYdcjQLM1nA-Yxr6UrnnHhmWZZt6OnqkTDek4Mnzahz8j9P5fuSXgUjFAisolOLNllmtlj2RU",
     filter: "verduras",
   },
-   {
+  {
     name: "PANES",
-    image:
-      "https://cdn-icons-png.flaticon.com/512/12651/12651927.png",
+    image: "https://cdn-icons-png.flaticon.com/512/12651/12651927.png",
     filter: "panes",
   },
 ];

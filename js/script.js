@@ -819,3 +819,29 @@ document.addEventListener("DOMContentLoaded", function () {
     resizeTimeout = setTimeout(generateCarouselItems, 200);
   });
 });
+function aplicarConfiguracionNegocio() {
+  document.documentElement.style.setProperty(
+    "--header-color",
+    businessConfig.headerColor,
+  );
+  document.documentElement.style.setProperty(
+    "--action-color",
+    businessConfig.headerColor,
+  );
+
+  document.title = businessConfig.name;
+
+  document.querySelectorAll("[data-business-name]").forEach((elemento) => {
+    elemento.textContent = businessConfig.name;
+  });
+
+  document.querySelectorAll("[data-business-logo]").forEach((elemento) => {
+    elemento.src = businessConfig.logo;
+    elemento.alt = `Logotipo de ${businessConfig.name}`;
+  });
+
+  const favicon = document.getElementById("businessFavicon");
+  if (favicon) favicon.href = businessConfig.logo;
+}
+
+document.addEventListener("DOMContentLoaded", aplicarConfiguracionNegocio);
