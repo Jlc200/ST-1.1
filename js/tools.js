@@ -6,12 +6,6 @@ const businessConfig = {
   whatsappNumber: "51931993482",
 };
 
-document.addEventListener("DOMContentLoaded", function () {
-  document.querySelectorAll("[data-whatsapp-link]").forEach((link) => {
-    link.href = `https://wa.me/${businessConfig.whatsappNumber}`;
-  });
-});
-
 // Datos para el carrusel principal
 const allCardsData = [
   {

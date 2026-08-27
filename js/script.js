@@ -844,3 +844,8 @@ function aplicarConfiguracionNegocio() {
 }
 
 document.addEventListener("DOMContentLoaded", aplicarConfiguracionNegocio);
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll("[data-whatsapp-link]").forEach((link) => {
+    link.href = `https://wa.me/${businessConfig.whatsappNumber}`;
+  });
+});
