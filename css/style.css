@@ -311,8 +311,12 @@ main {
   flex-direction: column;
   justify-content: space-between;
   gap: 0.8rem;
-  background: linear-gradient(145deg, #123b45 0%, #0b2733 58%, #081d29 100%);
-  color: #f8fafc;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--dark);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(14px) saturate(115%);
+  -webkit-backdrop-filter: blur(14px) saturate(115%);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -328,11 +332,11 @@ main {
 }
 
 .producto:hover .front {
-  opacity: 0.12;
+  opacity: 0.28;
 }
 
 .producto:hover {
-  box-shadow: 0 26px 55px rgba(8, 29, 41, 0.25);
+  box-shadow: 0 26px 55px rgba(15, 23, 42, 0.16);
 }
 
 .producto .front img {
@@ -417,8 +421,8 @@ main {
   margin-bottom: 0.65rem;
   font-size: 0.7rem;
   font-weight: 800;
-  color: #fcd34d;
-  letter-spacing: 0.14em;
+  color: var(--action-color);
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -426,14 +430,14 @@ main {
   content: "";
   width: 2.5rem;
   height: 2px;
-  background: linear-gradient(90deg, #fbbf24, transparent);
+  background: linear-gradient(90deg, var(--action-color), transparent);
 }
 
 .producto .back h4 {
   display: -webkit-box;
   margin: 0 0 1rem;
   overflow: hidden;
-  color: #ffffff;
+  color: var(--dark);
   font-size: 1.15rem;
   font-weight: 750;
   letter-spacing: 0;
@@ -447,13 +451,13 @@ main {
   gap: 0.55rem;
   padding: 0;
   margin: 0 0 0.75rem;
-  color: rgba(240, 253, 250, 0.9);
+  color: #475569;
   font-size: 0.9rem;
   font-weight: 500;
   overflow-y: auto;
   max-height: 140px;
   scrollbar-width: thin;
-  scrollbar-color: rgba(251, 191, 36, 0.6) transparent;
+  scrollbar-color: rgba(148, 163, 184, 0.8) transparent;
 }
 
 .producto .back ul::-webkit-scrollbar {
@@ -461,16 +465,16 @@ main {
 }
 
 .producto .back ul::-webkit-scrollbar-thumb {
-  background: rgba(251, 191, 36, 0.6);
+  background: rgba(148, 163, 184, 0.8);
   border-radius: 999px;
 }
 
 .producto .back ul li {
   position: relative;
   padding: 0.45rem 0.65rem 0.45rem 1.55rem;
-  border-left: 2px solid rgba(251, 191, 36, 0.7);
+  border-left: 2px solid rgba(255, 94, 0, 0.65);
   border-radius: 0 8px 8px 0;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(248, 250, 252, 0.78);
   letter-spacing: 0;
   line-height: 1.4;
   overflow-wrap: anywhere;
@@ -484,8 +488,8 @@ main {
   width: 0.42rem;
   height: 0.42rem;
   border-radius: 50%;
-  background: #fbbf24;
-  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.14);
+  background: var(--action-color);
+  box-shadow: 0 0 0 3px rgba(255, 94, 0, 0.12);
 }
 
 .producto .back .producto-actions {
@@ -502,8 +506,8 @@ main {
   font-weight: 700;
   letter-spacing: 0.01em;
   border: 1px solid transparent;
-  color: #fff;
-  box-shadow: 0 10px 20px rgba(3, 15, 22, 0.2);
+  color: var(--dark);
+  box-shadow: 0 8px 16px rgba(15, 23, 42, 0.1);
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
@@ -511,7 +515,7 @@ main {
 
 .producto .back .btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 13px 25px rgba(3, 15, 22, 0.3);
+  box-shadow: 0 12px 22px rgba(15, 23, 42, 0.16);
 }
 
 .producto .front .producto-main-cart {
@@ -532,24 +536,26 @@ main {
 }
 
 .producto .back .ver-detalle {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(251, 191, 36, 0.7);
-  color: #fcd34d;
+  background: rgba(255, 255, 255, 0.76);
+  border-color: rgba(15, 23, 42, 0.14);
+  color: #475569;
 }
 
 .producto .back .ver-detalle:hover {
-  background: rgba(251, 191, 36, 0.16);
-  color: #fff;
+  background: #fff;
+  color: var(--dark);
 }
 
 .producto .back .agregar-carrito {
   background: var(--action-color);
+  color: #fff;
   box-shadow: 0 10px 20px
     color-mix(in srgb, var(--action-color) 30%, transparent);
 }
 
 .producto .back .agregar-carrito:hover {
   background: var(--action-color);
+  color: #fff;
   filter: brightness(0.9);
 }
 
@@ -558,8 +564,8 @@ main {
 }
 
 .image-viewer-content {
-  background: #090b10;
-  color: #fff;
+  background: #f1f5f9;
+  color: var(--dark);
 }
 
 .image-viewer-toolbar {
@@ -580,16 +586,20 @@ main {
 .image-viewer-button {
   width: 42px;
   height: 42px;
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  border: 1px solid rgba(15, 23, 42, 0.12);
   border-radius: 50%;
-  background: rgba(17, 24, 39, 0.76);
-  color: #fff;
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--dark);
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12);
+  backdrop-filter: blur(10px);
   pointer-events: auto;
 }
 
 .image-viewer-button:hover,
 .image-viewer-button:focus-visible {
   background: var(--action-color);
+  border-color: var(--action-color);
+  color: #fff;
 }
 
 .image-viewer-viewport {
@@ -614,6 +624,7 @@ main {
   user-select: none;
   will-change: transform;
   transform-origin: center center;
+  filter: drop-shadow(0 18px 28px rgba(15, 23, 42, 0.18));
 }
 
 .product-detail-layout {
@@ -839,8 +850,12 @@ main {
     inset: 0;
     opacity: 0;
     visibility: hidden;
-    background: linear-gradient(145deg, #123b45 0%, #0b2733 58%, #081d29 100%);
-    color: #f8fafc;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--dark);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(14px) saturate(115%);
+    -webkit-backdrop-filter: blur(14px) saturate(115%);
     padding: 1.25rem;
     transform: none;
     min-height: auto;
