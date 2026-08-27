@@ -3,7 +3,15 @@ const businessConfig = {
   name: "JLCSTORE",
   logo: "https://www.pngmart.com/files/23/Free-Logos-PNG-Clipart.png",
   headerColor: "#f54d10",
+  whatsappNumber: "51931993482",
 };
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll("[data-whatsapp-link]").forEach((link) => {
+    link.href = `https://wa.me/${businessConfig.whatsappNumber}`;
+  });
+});
+
 // Datos para el carrusel principal
 const allCardsData = [
   {

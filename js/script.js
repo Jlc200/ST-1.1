@@ -282,7 +282,7 @@ function enviarListaWhatsApp() {
 
     const mensaje = `*COTIZACIÓN:* ${boletaContador} %0A----------------------------------------%0A*Cliente:* ${cliente.value}%0A----------------------------------------%0A${productos}----------------------------------------%0A*Subtotal:* S/ ${subtotal.toFixed(2)}%0A*IGV incluido:* S/ ${igv.toFixed(2)}%0A*Total a pagar:* S/ ${total.toFixed(2)}%0A----------------------------------------%0A${rCompra}`;
 
-    const url = `https://wa.me/${telefonoWhatsApp}?text=${mensaje}`;
+    const url = `https://wa.me/${businessConfig.whatsappNumber}?text=${mensaje}`;
     window.open(url, "_blank");
     cliente.value = "";
     window.location.reload();
@@ -742,7 +742,6 @@ const boletaContador = Math.random()
   .toString(36)
   .substring(2, 10)
   .toUpperCase();
-const telefonoWhatsApp = "51931993482";
 
 // carrusel
 document.addEventListener("DOMContentLoaded", function () {
