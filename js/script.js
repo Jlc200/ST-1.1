@@ -417,10 +417,12 @@ function inicializarCatalogoProductos(productos) {
 function mostrarDetalleProducto(producto) {
   if (!producto) return;
 
+  const imagenDetalle = document.getElementById("detalleProductoImagen");
   document.getElementById("detalleProductoTitulo").textContent = producto.marca;
   document.getElementById("detalleProductoNombre").textContent = producto.marca;
-  document.getElementById("detalleProductoImagen").src = producto.imagen;
-  document.getElementById("detalleProductoImagen").alt = producto.marca;
+  imagenDetalle.classList.remove("is-zoomed");
+  imagenDetalle.src = producto.imagen;
+  imagenDetalle.alt = producto.marca;
   document.getElementById("detalleProductoPrecio").textContent =
     `S/ ${Number(producto.precio).toFixed(2)}`;
 
@@ -452,6 +454,30 @@ function mostrarDetalleProducto(producto) {
     document.getElementById("detalleProductoModal"),
   ).show();
 }
+
+const imagenDetalle = document.getElementById("detalleProductoImagen");
+const modalDetalle = document.getElementById("detalleProductoModal");
+
+function alternarZoomImagen(event) {
+  if (event.type === "keydown" && event.key !== "Enter" && event.key !== " ") {
+    return;
+  }
+
+  if (event.type === "keydown") event.preventDefault();
+  imagenDetalle.classList.toggle("is-zoomed");
+  imagenDetalle.setAttribute(
+    "aria-label",
+    imagenDetalle.classList.contains("is-zoomed")
+      ? "Reducir imagen del producto"
+      : "Ampliar imagen del producto",
+  );
+}
+
+imagenDetalle.addEventListener("click", alternarZoomImagen);
+imagenDetalle.addEventListener("keydown", alternarZoomImagen);
+modalDetalle.addEventListener("hidden.bs.modal", () => {
+  imagenDetalle.classList.remove("is-zoomed");
+});
 
 // Inicializar catálogo de productos al cargar la página
 window.addEventListener("load", () => {
