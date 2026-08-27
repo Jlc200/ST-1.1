@@ -311,11 +311,16 @@ function inicializarCatalogoProductos(productos) {
     if (producto.disponible === "DISPONIBLE") {
       div.innerHTML = `
                 <div class="face front" id="${producto.qr}">
-                    <span class="producto-badge">Disponible</span>
+                    <div class="producto-heading">
+                      <span class="producto-badge">Disponible</span>
+                      <h3 class="producto-title">${producto.marca}</h3>
+                    </div>
                     <img class="cimg" src="${producto.imagen}" alt="${producto.marca}">
                     <div class="producto-info">
-                      <h3 class="producto-title">${producto.marca}</h3>
                       <span class="producto-precio">S/ ${precioFormateado}</span>
+                      <button type="button" class="btn agregar-carrito producto-main-cart" data-id="${producto.id}">
+                        <i class="fas fa-cart-plus" aria-hidden="true"></i> Agregar
+                      </button>
                     </div>
                 </div>
                 <div class="face back">
@@ -327,7 +332,12 @@ function inicializarCatalogoProductos(productos) {
                       </ul>
                     </div>
                     <div class="producto-actions">
-                      <button type="button" class="btn w-100 agregar-carrito" data-id="${producto.id}">Agregar al carrito</button>
+                      <button type="button" class="btn w-100 ver-detalle" data-id="${producto.id}">
+                        <i class="fas fa-expand-alt" aria-hidden="true"></i> Ver imagen en detalle
+                      </button>
+                      <button type="button" class="btn w-100 agregar-carrito" data-id="${producto.id}">
+                        <i class="fas fa-cart-plus" aria-hidden="true"></i> Agregar al carrito
+                      </button>
                     </div>
                 </div>
             `;
@@ -335,11 +345,16 @@ function inicializarCatalogoProductos(productos) {
       // Si el producto está agotado, mostrar un mensaje de alerta
       div.innerHTML = `
                 <div class="face front">
-                    <span class="producto-badge agotado">Agotado</span>
+                    <div class="producto-heading">
+                      <span class="producto-badge agotado">Agotado</span>
+                      <h3 class="producto-title">${producto.marca}</h3>
+                    </div>
                     <img class="img" src="${producto.imagen}" alt="${producto.marca}">
                     <div class="producto-info">
-                      <h3 class="producto-title">${producto.marca}</h3>
                       <span class="producto-precio">S/ ${precioFormateado}</span>
+                      <button type="button" class="btn producto-main-cart" disabled>
+                        <i class="fas fa-ban" aria-hidden="true"></i> Agotado
+                      </button>
                     </div>
                 </div>
                 <div class="face back">
@@ -351,6 +366,9 @@ function inicializarCatalogoProductos(productos) {
                       </ul>
                     </div>
                     <div class="producto-actions">
+                      <button type="button" class="btn w-100 ver-detalle" data-id="${producto.id}">
+                        <i class="fas fa-expand-alt" aria-hidden="true"></i> Ver imagen en detalle
+                      </button>
                       <h5 class="text-warning fw-bold">${producto.disponible}</h5>
                     </div>
                 </div>
@@ -385,6 +403,54 @@ function inicializarCatalogoProductos(productos) {
       }
     });
   });
+
+  document.querySelectorAll(".ver-detalle").forEach((boton) => {
+    boton.addEventListener("click", (event) => {
+      event.preventDefault();
+      mostrarDetalleProducto(
+        productos.find((item) => item.id === parseInt(boton.dataset.id)),
+      );
+    });
+  });
+}
+
+function mostrarDetalleProducto(producto) {
+  if (!producto) return;
+
+  document.getElementById("detalleProductoTitulo").textContent = producto.marca;
+  document.getElementById("detalleProductoNombre").textContent = producto.marca;
+  document.getElementById("detalleProductoImagen").src = producto.imagen;
+  document.getElementById("detalleProductoImagen").alt = producto.marca;
+  document.getElementById("detalleProductoPrecio").textContent =
+    `S/ ${Number(producto.precio).toFixed(2)}`;
+
+  const disponibilidad = document.getElementById(
+    "detalleProductoDisponibilidad",
+  );
+  disponibilidad.textContent =
+    producto.disponible === "DISPONIBLE" ? "Disponible" : "Agotado";
+  disponibilidad.classList.toggle(
+    "agotado",
+    producto.disponible !== "DISPONIBLE",
+  );
+  document.getElementById("detalleProductoLista").innerHTML = producto.detalles
+    .map((detalle) => `<li>${detalle}</li>`)
+    .join("");
+
+  const botonCarrito = document.getElementById("detalleProductoCarrito");
+  botonCarrito.disabled = producto.disponible !== "DISPONIBLE";
+  botonCarrito.innerHTML =
+    producto.disponible === "DISPONIBLE"
+      ? '<i class="fas fa-cart-plus" aria-hidden="true"></i> Agregar al carrito'
+      : "Producto agotado";
+  botonCarrito.onclick = () => {
+    if (producto.disponible === "DISPONIBLE")
+      agregarProductoAlCarrito(producto);
+  };
+
+  bootstrap.Modal.getOrCreateInstance(
+    document.getElementById("detalleProductoModal"),
+  ).show();
 }
 
 // Inicializar catálogo de productos al cargar la página

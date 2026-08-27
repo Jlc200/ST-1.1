@@ -139,6 +139,32 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="detalleProductoModal" tabindex="-1" aria-labelledby="detalleProductoTitulo" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content product-detail-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detalleProductoTitulo">Detalle del producto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="product-detail-layout">
+                        <div class="product-detail-image-wrap">
+                            <img id="detalleProductoImagen" src="" alt="">
+                        </div>
+                        <div class="product-detail-copy">
+                            <span id="detalleProductoDisponibilidad" class="producto-badge">Disponible</span>
+                            <h3 id="detalleProductoNombre"></h3>
+                            <p id="detalleProductoPrecio" class="product-detail-price"></p>
+                            <ul id="detalleProductoLista" class="product-detail-list"></ul>
+                            <button type="button" id="detalleProductoCarrito" class="btn product-detail-cart">
+                                <i class="fas fa-cart-plus" aria-hidden="true"></i> Agregar al carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <main class="mt-5 pt-3">
          <section class="mt-1">
   <div class="container pt-5">
