@@ -419,36 +419,9 @@ function mostrarDetalleProducto(producto) {
 
   const imagenDetalle = document.getElementById("detalleProductoImagen");
   document.getElementById("detalleProductoTitulo").textContent = producto.marca;
-  document.getElementById("detalleProductoNombre").textContent = producto.marca;
-  imagenDetalle.classList.remove("is-zoomed");
   imagenDetalle.src = producto.imagen;
   imagenDetalle.alt = producto.marca;
-  document.getElementById("detalleProductoPrecio").textContent =
-    `S/ ${Number(producto.precio).toFixed(2)}`;
-
-  const disponibilidad = document.getElementById(
-    "detalleProductoDisponibilidad",
-  );
-  disponibilidad.textContent =
-    producto.disponible === "DISPONIBLE" ? "Disponible" : "Agotado";
-  disponibilidad.classList.toggle(
-    "agotado",
-    producto.disponible !== "DISPONIBLE",
-  );
-  document.getElementById("detalleProductoLista").innerHTML = producto.detalles
-    .map((detalle) => `<li>${detalle}</li>`)
-    .join("");
-
-  const botonCarrito = document.getElementById("detalleProductoCarrito");
-  botonCarrito.disabled = producto.disponible !== "DISPONIBLE";
-  botonCarrito.innerHTML =
-    producto.disponible === "DISPONIBLE"
-      ? '<i class="fas fa-cart-plus" aria-hidden="true"></i> Agregar al carrito'
-      : "Producto agotado";
-  botonCarrito.onclick = () => {
-    if (producto.disponible === "DISPONIBLE")
-      agregarProductoAlCarrito(producto);
-  };
+  restablecerZoomImagen();
 
   bootstrap.Modal.getOrCreateInstance(
     document.getElementById("detalleProductoModal"),
@@ -456,28 +429,135 @@ function mostrarDetalleProducto(producto) {
 }
 
 const imagenDetalle = document.getElementById("detalleProductoImagen");
+const visorImagenViewport = document.getElementById("visorImagenViewport");
 const modalDetalle = document.getElementById("detalleProductoModal");
+let escalaImagen = 1;
+let posicionImagen = { x: 0, y: 0 };
+const punterosImagen = new Map();
+let distanciaInicial = 0;
+let escalaInicial = 1;
 
-function alternarZoomImagen(event) {
-  if (event.type === "keydown" && event.key !== "Enter" && event.key !== " ") {
+function aplicarTransformacionImagen() {
+  imagenDetalle.style.transform = `translate3d(${posicionImagen.x}px, ${posicionImagen.y}px, 0) scale(${escalaImagen})`;
+}
+
+function limitarPosicionImagen() {
+  if (escalaImagen === 1) {
+    posicionImagen = { x: 0, y: 0 };
     return;
   }
-
-  if (event.type === "keydown") event.preventDefault();
-  imagenDetalle.classList.toggle("is-zoomed");
-  imagenDetalle.setAttribute(
-    "aria-label",
-    imagenDetalle.classList.contains("is-zoomed")
-      ? "Reducir imagen del producto"
-      : "Ampliar imagen del producto",
+  const excesoX =
+    (imagenDetalle.offsetWidth * escalaImagen -
+      visorImagenViewport.clientWidth) /
+    2;
+  const excesoY =
+    (imagenDetalle.offsetHeight * escalaImagen -
+      visorImagenViewport.clientHeight) /
+    2;
+  posicionImagen.x = Math.max(
+    -Math.max(0, excesoX),
+    Math.min(Math.max(0, excesoX), posicionImagen.x),
+  );
+  posicionImagen.y = Math.max(
+    -Math.max(0, excesoY),
+    Math.min(Math.max(0, excesoY), posicionImagen.y),
   );
 }
 
-imagenDetalle.addEventListener("click", alternarZoomImagen);
-imagenDetalle.addEventListener("keydown", alternarZoomImagen);
-modalDetalle.addEventListener("hidden.bs.modal", () => {
-  imagenDetalle.classList.remove("is-zoomed");
+function actualizarZoomImagen(
+  nuevaEscala,
+  centroX = visorImagenViewport.clientWidth / 2,
+  centroY = visorImagenViewport.clientHeight / 2,
+) {
+  const escalaAnterior = escalaImagen;
+  escalaImagen = Math.max(1, Math.min(5, nuevaEscala));
+  posicionImagen.x =
+    centroX - (centroX - posicionImagen.x) * (escalaImagen / escalaAnterior);
+  posicionImagen.y =
+    centroY - (centroY - posicionImagen.y) * (escalaImagen / escalaAnterior);
+  limitarPosicionImagen();
+  aplicarTransformacionImagen();
+}
+
+function restablecerZoomImagen() {
+  escalaImagen = 1;
+  posicionImagen = { x: 0, y: 0 };
+  aplicarTransformacionImagen();
+}
+
+function distanciaEntrePunteros() {
+  const puntos = [...punterosImagen.values()];
+  return Math.hypot(
+    puntos[0].clientX - puntos[1].clientX,
+    puntos[0].clientY - puntos[1].clientY,
+  );
+}
+
+visorImagenViewport.addEventListener(
+  "wheel",
+  (event) => {
+    event.preventDefault();
+    const rect = visorImagenViewport.getBoundingClientRect();
+    actualizarZoomImagen(
+      escalaImagen * (event.deltaY < 0 ? 1.15 : 0.87),
+      event.clientX - rect.left,
+      event.clientY - rect.top,
+    );
+  },
+  { passive: false },
+);
+
+visorImagenViewport.addEventListener("pointerdown", (event) => {
+  visorImagenViewport.setPointerCapture(event.pointerId);
+  punterosImagen.set(event.pointerId, event);
+  if (punterosImagen.size === 2) {
+    distanciaInicial = distanciaEntrePunteros();
+    escalaInicial = escalaImagen;
+  }
 });
+
+visorImagenViewport.addEventListener("pointermove", (event) => {
+  if (!punterosImagen.has(event.pointerId)) return;
+  const anterior = punterosImagen.get(event.pointerId);
+  punterosImagen.set(event.pointerId, event);
+  if (punterosImagen.size === 2) {
+    actualizarZoomImagen(
+      (escalaInicial * distanciaEntrePunteros()) / distanciaInicial,
+    );
+    return;
+  }
+  if (escalaImagen > 1) {
+    posicionImagen.x += event.clientX - anterior.clientX;
+    posicionImagen.y += event.clientY - anterior.clientY;
+    limitarPosicionImagen();
+    aplicarTransformacionImagen();
+  }
+});
+
+function liberarPuntero(event) {
+  punterosImagen.delete(event.pointerId);
+}
+
+visorImagenViewport.addEventListener("pointerup", liberarPuntero);
+visorImagenViewport.addEventListener("pointercancel", liberarPuntero);
+visorImagenViewport.addEventListener("dblclick", (event) => {
+  const rect = visorImagenViewport.getBoundingClientRect();
+  actualizarZoomImagen(
+    escalaImagen > 1 ? 1 : 2.5,
+    event.clientX - rect.left,
+    event.clientY - rect.top,
+  );
+});
+document
+  .getElementById("alejarImagen")
+  .addEventListener("click", () => actualizarZoomImagen(escalaImagen * 0.8));
+document
+  .getElementById("acercarImagen")
+  .addEventListener("click", () => actualizarZoomImagen(escalaImagen * 1.25));
+document
+  .getElementById("restablecerImagen")
+  .addEventListener("click", restablecerZoomImagen);
+modalDetalle.addEventListener("hidden.bs.modal", restablecerZoomImagen);
 
 // Inicializar catálogo de productos al cargar la página
 window.addEventListener("load", () => {

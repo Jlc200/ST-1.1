@@ -411,28 +411,45 @@ main {
 }
 
 .producto .back .producto-subtitle {
-  display: inline-block;
-  margin-bottom: 0.45rem;
-  font-size: 0.68rem;
-  font-weight: 700;
-  color: #fbbf24;
-  letter-spacing: 0.18em;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: 0.65rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #fcd34d;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
+.producto .back .producto-subtitle::after {
+  content: "";
+  width: 2.5rem;
+  height: 2px;
+  background: linear-gradient(90deg, #fbbf24, transparent);
+}
+
 .producto .back h4 {
-  margin: 0 0 0.8rem;
+  display: -webkit-box;
+  margin: 0 0 1rem;
+  overflow: hidden;
   color: #ffffff;
-  font-size: 1.22rem;
-  font-weight: 800;
-  letter-spacing: 0.01em;
-  line-height: 1.2;
+  font-size: 1.15rem;
+  font-weight: 750;
+  letter-spacing: 0;
+  line-height: 1.28;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .producto .back ul {
-  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.55rem;
+  padding: 0;
   margin: 0 0 0.75rem;
-  color: rgba(235, 248, 249, 0.86);
+  color: rgba(240, 253, 250, 0.9);
+  font-size: 0.9rem;
+  font-weight: 500;
   overflow-y: auto;
   max-height: 140px;
   scrollbar-width: thin;
@@ -449,15 +466,26 @@ main {
 }
 
 .producto .back ul li {
-  margin-bottom: 0.55rem;
-  padding-left: 0.2rem;
-  font-size: 0.88rem;
-  letter-spacing: 0.01em;
-  line-height: 1.35;
+  position: relative;
+  padding: 0.45rem 0.65rem 0.45rem 1.55rem;
+  border-left: 2px solid rgba(251, 191, 36, 0.7);
+  border-radius: 0 8px 8px 0;
+  background: rgba(255, 255, 255, 0.06);
+  letter-spacing: 0;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
 }
 
-.producto .back ul li::marker {
-  color: #fbbf24;
+.producto .back ul li::before {
+  content: "";
+  position: absolute;
+  top: 0.85rem;
+  left: 0.65rem;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+  background: #fbbf24;
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.14);
 }
 
 .producto .back .producto-actions {
@@ -527,6 +555,65 @@ main {
 
 .product-detail-modal {
   overflow: hidden;
+}
+
+.image-viewer-content {
+  background: #090b10;
+  color: #fff;
+}
+
+.image-viewer-toolbar {
+  position: absolute;
+  z-index: 2;
+  inset: 1rem 1rem auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+}
+
+.image-viewer-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.image-viewer-button {
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 50%;
+  background: rgba(17, 24, 39, 0.76);
+  color: #fff;
+  pointer-events: auto;
+}
+
+.image-viewer-button:hover,
+.image-viewer-button:focus-visible {
+  background: var(--action-color);
+}
+
+.image-viewer-viewport {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none;
+}
+
+.image-viewer-viewport:active {
+  cursor: grabbing;
+}
+
+.image-viewer-viewport img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  user-select: none;
+  will-change: transform;
+  transform-origin: center center;
 }
 
 .product-detail-layout {

@@ -139,28 +139,20 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="detalleProductoModal" tabindex="-1" aria-labelledby="detalleProductoTitulo" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content product-detail-modal">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="detalleProductoTitulo">Detalle del producto</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="product-detail-layout">
-                        <div class="product-detail-image-wrap">
-                            <img id="detalleProductoImagen" src="" alt="" tabindex="0" role="button" aria-label="Ampliar imagen del producto" title="Ampliar imagen">
-                        </div>
-                        <div class="product-detail-copy">
-                            <span id="detalleProductoDisponibilidad" class="producto-badge">Disponible</span>
-                            <h3 id="detalleProductoNombre"></h3>
-                            <p id="detalleProductoPrecio" class="product-detail-price"></p>
-                            <ul id="detalleProductoLista" class="product-detail-list"></ul>
-                            <button type="button" id="detalleProductoCarrito" class="btn product-detail-cart">
-                                <i class="fas fa-cart-plus" aria-hidden="true"></i> Agregar al carrito
-                            </button>
-                        </div>
+    <div class="modal fade image-viewer-modal" id="detalleProductoModal" tabindex="-1" aria-labelledby="detalleProductoTitulo" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content image-viewer-content">
+                <div class="image-viewer-toolbar">
+                    <h5 class="visually-hidden" id="detalleProductoTitulo">Imagen del producto</h5>
+                    <div class="image-viewer-controls" aria-label="Controles de imagen">
+                        <button type="button" class="image-viewer-button" id="alejarImagen" aria-label="Alejar imagen" title="Alejar"><i class="fas fa-minus" aria-hidden="true"></i></button>
+                        <button type="button" class="image-viewer-button" id="restablecerImagen" aria-label="Restablecer imagen" title="Restablecer"><i class="fas fa-expand" aria-hidden="true"></i></button>
+                        <button type="button" class="image-viewer-button" id="acercarImagen" aria-label="Acercar imagen" title="Acercar"><i class="fas fa-plus" aria-hidden="true"></i></button>
                     </div>
+                    <button type="button" class="image-viewer-button" data-bs-dismiss="modal" aria-label="Cerrar visor" title="Cerrar"><i class="fas fa-xmark" aria-hidden="true"></i></button>
+                </div>
+                <div class="image-viewer-viewport" id="visorImagenViewport">
+                    <img id="detalleProductoImagen" src="" alt="" draggable="false">
                 </div>
             </div>
         </div>

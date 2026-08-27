@@ -1,8 +1,8 @@
 // Configuracion general del negocio. Edita estos valores para personalizar la tienda.
 const businessConfig = {
-  name: "JLCSTORE",
+  name: "D´JLC",
   logo: "https://www.pngmart.com/files/23/Free-Logos-PNG-Clipart.png",
-  headerColor: "#f54d10",
+  headerColor: "#fe723e",
   whatsappNumber: "51931993482",
 };
 
