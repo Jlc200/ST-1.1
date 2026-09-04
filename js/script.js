@@ -2,6 +2,16 @@
 
 // Wait for the DOM to be fully loaded
 window.addEventListener("DOMContentLoaded", function () {
+  const descargarAplicacion = document.getElementById("descargarAplicacion");
+  const userAgent = navigator.userAgent || "";
+  const esAndroidWebView =
+    /Android/i.test(userAgent) &&
+    (/;\s*wv\)/i.test(userAgent) || /Version\/4\.0/i.test(userAgent));
+
+  if (esAndroidWebView && descargarAplicacion) {
+    descargarAplicacion.hidden = true;
+  }
+
   // Get the modal element
   var usuarioModal = document.getElementById("usuarioModal");
   // Get the form element
