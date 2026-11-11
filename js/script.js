@@ -922,6 +922,17 @@ function aplicarConfiguracionNegocio() {
 
   document.querySelectorAll("[data-business-name]").forEach((elemento) => {
     elemento.textContent = businessConfig.name;
+
+    if (elemento.classList.contains("business-name")) {
+      const palabras = businessConfig.name.trim().split(/\s+/);
+      if (palabras.length > 1) {
+        elemento.replaceChildren(
+          document.createTextNode(palabras[0]),
+          document.createElement("br"),
+          document.createTextNode(palabras.slice(1).join(" ")),
+        );
+      }
+    }
   });
 
   document.querySelectorAll("[data-business-logo]").forEach((elemento) => {
