@@ -23,58 +23,40 @@ const allCardsData = [
     text: "Promocion enrrollado + vaso de chicha morada a solo S/ 12.00",
     img: "https://lh3.googleusercontent.com/pw/AP1GczNtRr5qkFACECIeBKOyb_9St2jcWhXlnbGhMgfnGufpPaP_Exq3hNonyEUp5bBjrw2hYbtzIY0ZBAft1IIZ2457I7VQxx1m40WS3gnNQ9GgCKodP0wG-yAlUeux5zkMLKsGIQWn3RJKFRoMJ0BLw71R=w1672-h941-s-no-gm?authuser=0",
   },
+  {
+    title: "Ofertas especiales",
+    text: "Promocion enrrollado de hot dog + un vaso de chicha morada a solo S/ 9.00",
+    img: "https://lh3.googleusercontent.com/pw/AP1GczOiYfFos7R6Vv5GNhf22SOYaqSZ4YbNoKQ7G2PLy-wznPRNKEbMD8TnrKzqXj6RkwBnbMb0zdQFDeTInJU8xx7fTihmSdVOq57U5WdRW8YomrNj1vG2RRp4im0VpoK1xfCK1q7QsD1IgCROCAfJvnc9=w1199-h670-s-no-gm?authuser=0",
+  },
 ];
 
 // Datos para los filtros de categoría
 const categoryFiltersData = [
-  { name: "Filtrar", image: "img/filtro.png", filter: "all" },
+  { name: "Sin filtro", image: "img/filtro.png", filter: "all" }, 
   {
-    name: "Abarrotes",
-    image:
-      "https://lh3.googleusercontent.com/pw/AP1GczPCcGwxTMTLH215W75VI1EfbX1GRi39yCdrOu13kH-8LVC5xMMSJr8xoctdHeO-iknds9ZaSgE13QKMVMCVcxHeikhKJFQce6tsWFg8ja6nA1NTUBQ",
-    filter: "abarrotes",
+    name: "Panes",
+    image: "https://img.magnific.com/vector-gratis/icono-comida-panaderia-hogaza-pan-blanco_1951-760.jpg?semt=ais_hybrid&w=740&q=80",
+    filter: "panes",
+  }, 
+  {
+    name: "Bocaditos",
+    image: "https://img.magnific.com/vector-premium/icono-postre-dulce-plato-ceramica_1310786-33982.jpg?semt=ais_hybrid&w=740&q=80",
+    filter: "bocaditos",
+  }, 
+  {
+    name: "Embutidos",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFdjRbW_ZaURUKWM_zNwAEIqZ-e6dhtbkYqy3ld-W1cg&s=10",
+    filter: "embutidos",
   },
   {
-    name: "Bebidas",
-    image:
-      "https://lh3.googleusercontent.com/pw/AP1GczOmOgJ2HfLCBrkfSQld6t-KKd55sZicYXzukOZ3w6_vVOevEBacbpSicvONm-AZAoEwZxqJDoDkDbhQOT4B9lWiIfLHrtluY_vebPeDjoCHS0wW-vs",
-    filter: "bebidas",
+    name: "Reposteria",
+    image: "https://images.emojiterra.com/microsoft/fluent-emoji/15.1/512px/1f370_color.png",
+    filter: "reposteria",
   },
   {
-    name: "Carnes",
-    image:
-      "https://lh3.googleusercontent.com/pw/AP1GczNf2b6W70ihHX45v6LgjDvB0iczMuYfdf8D1_q1DYRkdyRh2O9J5b_3weqSHMTj2P0hicCzKpXokf-ZAgzuf5ROna7s9djLHr7WARsCjBkxF9u4KJI",
-    filter: "carnes",
-  },
-  {
-    name: "Conservas",
-    image:
-      "https://lh3.googleusercontent.com/pw/AP1GczMU5B6TMQnOkjaRg6FuRxDi7oQC0GDpUuQ3MyBUZVaBSUBoCgOdsLgaINb3Dij8dQgHsSTRVAdNaFqFwriYOUZIYWTxup3ihp7AklcnmITb0ZkkoRA",
-    filter: "conservas",
-  },
-  {
-    name: "Escolar",
-    image:
-      "https://lh3.googleusercontent.com/pw/AP1GczMBmVGF7XHsdLDqocGrun2GUa40ix4dYApVhorLFoALc09JAazDjRUba-SJNPM0Rn2JyuyB6EotXrLJ8jCachIAKv447jM7cygeje0k079RZIGICKU",
-    filter: "escolar",
-  },
-  {
-    name: "Frutas",
-    image:
-      "https://lh3.googleusercontent.com/pw/AP1GczPHzCVY0p7PtW8qh3UYyIxTrUKyflERoJ_Ysa0sB2lPryxCJwlb2ihdN2O6VXWQwg0mPzucMPiNf53HVAUiGY9gV27BKAI3ng6Ei59lUXaoa09ziAw",
-    filter: "frutas",
-  },
-  {
-    name: "Higene",
-    image:
-      "https://lh3.googleusercontent.com/pw/AP1GczOe4CQ3wXA38_7EFRSqOSUu4uGBtejngZY5-FuUdBmieK3xWNi94Whpi8lbtL73z8dt-C_iQWvtWJ8-WFc1Kvd1hUfo9NZA3gC_ikjCOcaJ4gey9kM",
-    filter: "higene",
-  },
-  {
-    name: "Hogar",
-    image:
-      "https://lh3.googleusercontent.com/pw/AP1GczOt8rCTqx_RtLv-8XD9ErVG_-EKiPoh-WlyOzu8xwVglDXAAOj3b2Nh97o-CPL2cx4dlxgMk5_M_AhdzUtBiBTzhamrDSkVI6S4jb0UASKSj6dSjEY",
-    filter: "hogar",
+    name: "Tortas",
+    image: "https://cdn3d.iconscout.com/3d/premium/thumb/torta-de-cumpleanos-3d-icon-png-download-15163386.png",
+    filter: "tortas",
   },
   {
     name: "Lacteos",
@@ -83,20 +65,21 @@ const categoryFiltersData = [
     filter: "lacteos",
   },
   {
-    name: "Limpieza",
+    name: "Bebidas",
     image:
-    "https://lh3.googleusercontent.com/pw/AP1GczNtRr5qkFACECIeBKOyb_9St2jcWhXlnbGhMgfnGufpPaP_Exq3hNonyEUp5bBjrw2hYbtzIY0ZBAft1IIZ2457I7VQxx1m40WS3gnNQ9GgCKodP0wG-yAlUeux5zkMLKsGIQWn3RJKFRoMJ0BLw71R=w1672-h941-s-no-gm?authuser=0",
-    filter: "limpieza",
+      "https://lh3.googleusercontent.com/pw/AP1GczOmOgJ2HfLCBrkfSQld6t-KKd55sZicYXzukOZ3w6_vVOevEBacbpSicvONm-AZAoEwZxqJDoDkDbhQOT4B9lWiIfLHrtluY_vebPeDjoCHS0wW-vs",
+    filter: "bebidas",
   },
   {
-    name: "Verduras",
+    name: "Conservas",
     image:
-      "https://lh3.googleusercontent.com/pw/AP1GczPtQFmO0XQv3RPp3RJFkGG3RsKtUh6cc9RpISw87fkYdcjQLM1nA-Yxr6UrnnHhmWZZt6OnqkTDek4Mnzahz8j9P5fuSXgUjFAisolOLNllmtlj2RU",
-    filter: "verduras",
+      "https://media.istockphoto.com/id/1067347134/es/vector/conjunto-de-alimentos-enlatados.jpg?s=612x612&w=0&k=20&c=mWs0Jobi3oeCo4GHTcRcxrChUFMxJWUTSDYeymB-Ib4=",
+    filter: "conservas",
   },
   {
-    name: "PANES",
-    image: "https://cdn-icons-png.flaticon.com/512/12651/12651927.png",
-    filter: "panes",
+    name: "Higene",
+    image:
+      "https://lh3.googleusercontent.com/pw/AP1GczOe4CQ3wXA38_7EFRSqOSUu4uGBtejngZY5-FuUdBmieK3xWNi94Whpi8lbtL73z8dt-C_iQWvtWJ8-WFc1Kvd1hUfo9NZA3gC_ikjCOcaJ4gey9kM",
+    filter: "higene",
   },
 ];
