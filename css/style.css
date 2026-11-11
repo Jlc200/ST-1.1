@@ -226,8 +226,8 @@ main {
   box-shadow: 0 20px 45px rgba(15, 23, 42, 0.08);
 }
 
-.carousel-item {
-  padding: 1rem 0;
+#cardCarousel .carousel-item {
+  padding: 0;
 }
 
 .carousel-item .card {

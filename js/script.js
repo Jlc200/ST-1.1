@@ -890,7 +890,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const currentCardData = allCardsData[cardIndex];
 
         const col = document.createElement("div");
-        col.classList.add("col-12", "col-md-6", "col-lg-4", "mb-3");
+        col.classList.add("col-12", "col-md-6", "col-lg-4");
         if (j >= 1 && window.innerWidth < 768) {
           col.classList.add("d-none");
         } else if (j >= 2 && window.innerWidth < 992) {
