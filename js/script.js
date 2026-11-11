@@ -316,80 +316,61 @@ function inicializarCatalogoProductos(productos) {
   productos.forEach((producto) => {
     const div = document.createElement("div");
     const precioFormateado = Number(producto.precio).toFixed(2);
+    const estaDisponible = producto.disponible === "DISPONIBLE";
+    const estadoProducto = estaDisponible
+      ? '<span class="producto-badge">Disponible</span>'
+      : '<span class="producto-badge agotado">Agotado</span>';
+    const botonCompra = estaDisponible
+      ? `<button type="button" class="btn agregar-carrito producto-main-cart" data-id="${producto.id}">
+          <i class="fas fa-cart-plus" aria-hidden="true"></i> Agregar
+        </button>`
+      : `<button type="button" class="btn producto-main-cart" disabled>
+          <i class="fas fa-ban" aria-hidden="true"></i> Agotado
+        </button>`;
+
     div.classList.add("producto", `category-${producto.categoria}`);
-    // Verificar la disponibilidad del producto
-    if (producto.disponible === "DISPONIBLE") {
-      div.innerHTML = `
-                <div class="face front" id="${producto.qr}">
-                    <div class="producto-heading">
-                      <span class="producto-badge">Disponible</span>
-                      <h3 class="producto-title">${producto.marca}</h3>
-                    </div>
-                    <img class="cimg" src="${producto.imagen}" alt="${producto.marca}">
-                    <div class="producto-info">
-                      <span class="producto-precio">S/ ${precioFormateado}</span>
-                      <button type="button" class="btn agregar-carrito producto-main-cart" data-id="${producto.id}">
-                        <i class="fas fa-cart-plus" aria-hidden="true"></i> Agregar
-                      </button>
-                    </div>
-                </div>
-                <div class="face back">
-                    <div>
-                      <span class="producto-subtitle">Detalles</span>
-                      <h4 class="name my-0 font-weight-bold">${producto.marca}</h4>
-                      <ul class="list-unstyled mt-2 mb-3">
-                          ${producto.detalles.map((ele) => `<li>${ele}</li>`).join("")}
-                      </ul>
-                    </div>
-                    <div class="producto-actions">
-                      <button type="button" class="btn w-100 ver-detalle" data-id="${producto.id}">
-                        <i class="fas fa-expand-alt" aria-hidden="true"></i> Ver imagen en detalle
-                      </button>
-                      <button type="button" class="btn w-100 agregar-carrito" data-id="${producto.id}">
-                        <i class="fas fa-cart-plus" aria-hidden="true"></i> Agregar al carrito
-                      </button>
-                    </div>
-                </div>
-            `;
-    } else {
-      // Si el producto está agotado, mostrar un mensaje de alerta
-      div.innerHTML = `
-                <div class="face front">
-                    <div class="producto-heading">
-                      <span class="producto-badge agotado">Agotado</span>
-                      <h3 class="producto-title">${producto.marca}</h3>
-                    </div>
-                    <img class="img" src="${producto.imagen}" alt="${producto.marca}">
-                    <div class="producto-info">
-                      <span class="producto-precio">S/ ${precioFormateado}</span>
-                      <button type="button" class="btn producto-main-cart" disabled>
-                        <i class="fas fa-ban" aria-hidden="true"></i> Agotado
-                      </button>
-                    </div>
-                </div>
-                <div class="face back">
-                    <div>
-                      <span class="producto-subtitle">Detalles</span>
-                      <h4 class="name my-0 font-weight-bold">${producto.marca}</h4>
-                      <ul class="list-unstyled mt-2 mb-3">
-                          ${producto.detalles.map((ele) => `<li>${ele}</li>`).join("")}
-                      </ul>
-                    </div>
-                    <div class="producto-actions">
-                      <button type="button" class="btn w-100 ver-detalle" data-id="${producto.id}">
-                        <i class="fas fa-expand-alt" aria-hidden="true"></i> Ver imagen en detalle
-                      </button>
-                      <h5 class="text-warning fw-bold">${producto.disponible}</h5>
-                    </div>
-                </div>
-            `;
-    }
+    div.innerHTML = `
+      <div class="producto-inner">
+        <div class="producto-face front" id="${producto.qr}" aria-hidden="false">
+          <div class="producto-heading">
+            ${estadoProducto}
+            <h3 class="producto-title">${producto.marca}</h3>
+          </div>
+          <button type="button" class="producto-imagen ver-detalle" data-id="${producto.id}" aria-label="Ver imagen de ${producto.marca}">
+            <img src="${producto.imagen}" alt="">
+          </button>
+          <div class="producto-info">
+            <span class="producto-precio">S/ ${precioFormateado}</span>
+            <div class="producto-actions">
+              <button type="button" class="btn producto-mas-detalles" aria-expanded="false" aria-controls="detalles-${producto.id}">
+                <i class="fas fa-circle-info" aria-hidden="true"></i> <span>Más detalles</span>
+              </button>
+              ${botonCompra}
+            </div>
+          </div>
+        </div>
+        <div class="producto-face back" aria-hidden="true" inert>
+          <div class="producto-details-scroll" id="detalles-${producto.id}" tabindex="0" aria-label="Detalles de ${producto.marca}">
+            <div class="producto-details-summary">
+              <img src="${producto.imagen}" alt="">
+              <h3 class="name">${producto.marca}</h3>
+            </div>
+            <p class="producto-details-label">Descripción del producto</p>
+            <ul class="list-unstyled">
+              ${producto.detalles.map((ele) => `<li>${ele}</li>`).join("")}
+            </ul>
+          </div>
+          <button type="button" class="btn producto-volver">
+            <i class="fas fa-arrow-left" aria-hidden="true"></i> Volver a la tarjeta
+          </button>
+        </div>
+      </div>
+    `;
 
     contenedorProductos.appendChild(div);
   });
 
-  // Agregar evento click a los botones "Comprar"
-  const botonesComprar = document.querySelectorAll(".agregar-carrito");
+  const botonesComprar = contenedorProductos.querySelectorAll(".agregar-carrito");
 
   botonesComprar.forEach((boton) => {
     boton.addEventListener("click", (event) => {
@@ -414,12 +395,44 @@ function inicializarCatalogoProductos(productos) {
     });
   });
 
-  document.querySelectorAll(".ver-detalle").forEach((boton) => {
+  contenedorProductos.querySelectorAll(".ver-detalle").forEach((boton) => {
     boton.addEventListener("click", (event) => {
       event.preventDefault();
       mostrarDetalleProducto(
         productos.find((item) => item.id === parseInt(boton.dataset.id)),
       );
+    });
+  });
+
+  contenedorProductos.querySelectorAll(".producto-mas-detalles").forEach((boton) => {
+    boton.addEventListener("click", () => {
+      const tarjeta = boton.closest(".producto");
+      const frente = tarjeta.querySelector(".front");
+      const reverso = tarjeta.querySelector(".back");
+
+      tarjeta.classList.add("is-flipped");
+      boton.setAttribute("aria-expanded", "true");
+      frente.setAttribute("aria-hidden", "true");
+      frente.inert = true;
+      reverso.setAttribute("aria-hidden", "false");
+      reverso.inert = false;
+      reverso.querySelector(".producto-details-scroll").focus();
+    });
+  });
+
+  contenedorProductos.querySelectorAll(".producto-volver").forEach((boton) => {
+    boton.addEventListener("click", () => {
+      const tarjeta = boton.closest(".producto");
+      const frente = tarjeta.querySelector(".front");
+      const reverso = tarjeta.querySelector(".back");
+
+      tarjeta.classList.remove("is-flipped");
+      frente.setAttribute("aria-hidden", "false");
+      frente.inert = false;
+      reverso.setAttribute("aria-hidden", "true");
+      reverso.inert = true;
+      tarjeta.querySelector(".producto-mas-detalles").setAttribute("aria-expanded", "false");
+      tarjeta.querySelector(".producto-mas-detalles").focus();
     });
   });
 }
