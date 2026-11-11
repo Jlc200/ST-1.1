@@ -10,23 +10,18 @@ const businessConfig = {
 const allCardsData = [
   {
     title: "Ofertas especiales",
-    text: "Descubre precios bajos en productos seleccionados.",
-    img: "img/8.png",
+    text: "Promocion empanadas de carne y pollo + vaso de chicha morada a solo S/ 10.00",
+    img: "https://lh3.googleusercontent.com/pw/AP1GczNtRr5qkFACECIeBKOyb_9St2jcWhXlnbGhMgfnGufpPaP_Exq3hNonyEUp5bBjrw2hYbtzIY0ZBAft1IIZ2457I7VQxx1m40WS3gnNQ9GgCKodP0wG-yAlUeux5zkMLKsGIQWn3RJKFRoMJ0BLw71R=w1672-h941-s-no-gm?authuser=0",
   },
   {
-    title: "Entrega rápida",
-    text: "Recibe tu pedido con envío rápido y seguro.",
-    img: "img/9.png",
+    title: "Ofertas especiales",
+    text: "Promocion empanadas de carne y pollo + vaso de chicha morada a solo S/ 9.00",
+    img:"https://lh3.googleusercontent.com/pw/AP1GczNbwzUTF7T-ikCQEbjVJVQ-BK8y1ksswYkCeyE9ljWlgYoyh8MNpSvco1J_MD5SDUnWpxcrkRvGfa9Xwk57H-3BBgXkmmlJQd5eZU9SxRG3x5SAdwmAxyl0t0zXBU38yd9tO6LjRWwxqIz7yBwUaxrk=w1672-h941-s-no-gm?authuser=0",
   },
   {
-    title: "Calidad garantizada",
-    text: "Productos frescos y marcas confiables para tu hogar.",
-    img: "img/3.png",
-  },
-  {
-    title: "Compras fáciles",
-    text: "Busca, agrega y paga desde un mismo lugar.",
-    img: "img/4.png",
+    title: "Ofertas especiales",
+    text: "Promocion enrrollado + vaso de chicha morada a solo S/ 12.00",
+    img: "https://lh3.googleusercontent.com/pw/AP1GczNtRr5qkFACECIeBKOyb_9St2jcWhXlnbGhMgfnGufpPaP_Exq3hNonyEUp5bBjrw2hYbtzIY0ZBAft1IIZ2457I7VQxx1m40WS3gnNQ9GgCKodP0wG-yAlUeux5zkMLKsGIQWn3RJKFRoMJ0BLw71R=w1672-h941-s-no-gm?authuser=0",
   },
 ];
 
@@ -90,7 +85,7 @@ const categoryFiltersData = [
   {
     name: "Limpieza",
     image:
-      "https://lh3.googleusercontent.com/pw/AP1GczNIOllCeakcxwskoSKi8F5t6544kBQKUz65AAhfc-2DJ_Oj3vRvV1NrpkXH5gnAhbdQvS7vX2uDqotl163VpeNHH-5Ce8IkYVLU3vTBDoMjEDIwuqU",
+    "https://lh3.googleusercontent.com/pw/AP1GczNtRr5qkFACECIeBKOyb_9St2jcWhXlnbGhMgfnGufpPaP_Exq3hNonyEUp5bBjrw2hYbtzIY0ZBAft1IIZ2457I7VQxx1m40WS3gnNQ9GgCKodP0wG-yAlUeux5zkMLKsGIQWn3RJKFRoMJ0BLw71R=w1672-h941-s-no-gm?authuser=0",
     filter: "limpieza",
   },
   {

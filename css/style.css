@@ -430,7 +430,6 @@ main {
   min-height: 0;
   flex: 1;
   overflow-y: auto;
-  overscroll-behavior: contain;
   scrollbar-width: thin;
   scrollbar-color: rgba(148, 163, 184, 0.8) transparent;
 }
