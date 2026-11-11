@@ -15,7 +15,7 @@ const allCardsData = [
   },
   {
     title: "Ofertas especiales",
-    text: "Promocion empanadas de carne y pollo + vaso de chicha morada a solo S/ 9.00",
+    text: "Promocion empanadas de carne y pollo + vaso de cafe a solo S/ 9.00",
     img:"https://lh3.googleusercontent.com/pw/AP1GczNbwzUTF7T-ikCQEbjVJVQ-BK8y1ksswYkCeyE9ljWlgYoyh8MNpSvco1J_MD5SDUnWpxcrkRvGfa9Xwk57H-3BBgXkmmlJQd5eZU9SxRG3x5SAdwmAxyl0t0zXBU38yd9tO6LjRWwxqIz7yBwUaxrk=w1672-h941-s-no-gm?authuser=0",
   },
   {
