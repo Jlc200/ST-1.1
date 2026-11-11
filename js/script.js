@@ -891,7 +891,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const col = document.createElement("div");
         col.classList.add("col-12", "col-md-6", "col-lg-4", "mb-3");
-
         if (j >= 1 && window.innerWidth < 768) {
           col.classList.add("d-none");
         } else if (j >= 2 && window.innerWidth < 992) {
