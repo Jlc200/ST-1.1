@@ -350,11 +350,11 @@ function inicializarCatalogoProductos(productos) {
           </div>
         </div>
         <div class="producto-face back" aria-hidden="true" inert>
+          <div class="producto-details-summary">
+            <img src="${producto.imagen}" alt="">
+            <h3 class="name">${producto.marca}</h3>
+          </div>
           <div class="producto-details-scroll" id="detalles-${producto.id}" tabindex="0" aria-label="Detalles de ${producto.marca}">
-            <div class="producto-details-summary">
-              <img src="${producto.imagen}" alt="">
-              <h3 class="name">${producto.marca}</h3>
-            </div>
             <p class="producto-details-label">Descripción del producto</p>
             <ul class="list-unstyled">
               ${producto.detalles.map((ele) => `<li>${ele}</li>`).join("")}
@@ -420,11 +420,12 @@ function inicializarCatalogoProductos(productos) {
     });
   });
 
-  contenedorProductos.querySelectorAll(".producto-volver").forEach((boton) => {
-    boton.addEventListener("click", () => {
-      const tarjeta = boton.closest(".producto");
+  contenedorProductos.querySelectorAll(".producto-face.back").forEach((reverso) => {
+    reverso.addEventListener("click", (event) => {
+      if (event.target.closest(".producto-details-scroll")) return;
+
+      const tarjeta = reverso.closest(".producto");
       const frente = tarjeta.querySelector(".front");
-      const reverso = tarjeta.querySelector(".back");
 
       tarjeta.classList.remove("is-flipped");
       frente.setAttribute("aria-hidden", "false");
