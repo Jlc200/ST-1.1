@@ -1,6 +1,6 @@
 // Configuracion general del negocio. Edita estos valores para personalizar la tienda.
 const businessConfig = {
-  name: "D´JLC",
+  name: "Panaderia STEFANO",
   logo: "https://www.pngmart.com/files/23/Free-Logos-PNG-Clipart.png",
   headerColor: "#fe723e",
   whatsappNumber: "51931993482",
@@ -32,7 +32,7 @@ const allCardsData = [
 
 // Datos para los filtros de categoría
 const categoryFiltersData = [
-  { name: "Todos", image: "img/filtro.png", filter: "all" },
+  { name: "Filtrar", image: "img/filtro.png", filter: "all" },
   {
     name: "Abarrotes",
     image:
