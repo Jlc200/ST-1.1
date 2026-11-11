@@ -65,6 +65,11 @@ input {
   letter-spacing: 0.04em;
 }
 
+.navbar-brand .business-name {
+  text-align: center;
+  line-height: 1.1;
+}
+
 .navbar .form-control {
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.22);
